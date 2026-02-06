@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Exam Mastery | Student Schedule</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Navigation / Header -->
+        <header class="glass-header">
+            <div class="logo">
+                <i class="fa-solid fa-atom pulse"></i>
+                <span>ExamMastery</span>
+            </div>
+            <div class="user-welcome">
+                <span id="welcomeMsg" style="font-weight: 600; font-size: 1.1rem; color: var(--text-main);">Hi,
+                    Student</span>
+                <button id="logoutBtn"
+                    style="margin-left: 10px; background: none; border: 1px solid var(--border); color: var(--text-muted); padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8rem;">Switch</button>
+            </div>
+            <div class="date-display" id="currentDate"></div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Ready for <span class="highlight">Physics</span>?</h1>
+                <p>Your daily roadmap to public exam success.</p>
+                <div class="progress-card">
+                    <div class="progress-info">
+                        <span>Daily Progress</span>
+                        <span id="progressText">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Grid Layout -->
+        <main class="dashboard-grid">
+
+            <!-- Schedule Section -->
+            <section class="card schedule-card">
+                <div class="card-header">
+                    <h2><i class="fa-regular fa-calendar-check"></i> Today's Schedule</h2>
+                </div>
+                <div class="timeline" id="scheduleList">
+                    <!-- Schedule items injected by JS -->
+                </div>
+            </section>
+
+            <!-- Daily Focus Section -->
+            <section class="card physics-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-lightbulb"></i> <span id="focusTitle">Topic of the Day</span></h2>
+                    <span class="badge">High Priority</span>
+                </div>
+                <div class="content-box">
+                    <h3>Current Topic: <span id="dailyTopic" class="highlight">Loading...</span></h3>
+                    <p class="desc">Key concepts for today.</p>
+                    <ul class="resources-list">
+                        <li><a href="#" class="resource-link"><i class="fa-regular fa-file-pdf"></i> Important
+                                Derivations PDF</a></li>
+                        <li><a href="#" class="resource-link"><i class="fa-solid fa-play"></i> Concept Video: Gauss
+                                Law</a></li>
+                        <li><a href="#" class="resource-link"><i class="fa-solid fa-flask"></i> Lab Manual Notes</a>
+                        </li>
+                    </ul>
+                    <button class="btn-action">Start Quiz</button>
+                </div>
+            </section>
+
+            <!-- Task Tracker Section -->
+            <section class="card tasks-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-list-check"></i> Task Tracker</h2>
+                    <button class="btn-icon" id="addTaskBtn"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <ul class="task-list" id="taskList">
+                    <!-- Tasks injected by JS -->
+                </ul>
+            </section>
+
+        </main>
+
+        <!-- Learning Resources / Footer -->
+        <footer class="resources-footer">
+            <h3>Quick Learning Links</h3>
+            <div class="link-grid">
+                <a href="#" class="quick-link">Past Papers</a>
+                <a href="#" class="quick-link">Topper's Answer Sheets</a>
+                <a href="#" class="quick-link">Formula Sheets</a>
+                <a href="#" class="quick-link">Exam Tips</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal-overlay active" id="registrationModal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <div class="modal-header" style="justify-content: center;">
+                <h2 style="font-size: 2rem;">🚀 Welcome!</h2>
+            </div>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Let's set up your personalized schedule.</p>
+
+            <form id="regForm" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="text" id="regName" placeholder="Your Name" required
+                    style="padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: white;">
+
+                <select id="regGrade" required
+                    style="padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-dark); color: white;">
+                    <option value="" disabled selected>Select Class</option>
+                    <option value="10">Class 10 (All Subjects)</option>
+                    <option value="11">Class 11</option>
+                    <option value="12">Class 12</option>
+                </select>
+
+                <div id="streamSection" style="display: none;">
+                    <select id="regStream"
+                        style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-dark); color: white;">
+                        <option value="" disabled selected>Select Stream</option>
+                        <option value="pure-science">Pure Science</option>
+                        <option value="commerce">Commerce</option>
+                        <option value="statistics">Statistics</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-action">Get Started</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="modal-overlay" id="quizModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-brain"></i> Quick Check</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="quiz-body">
+                <p class="question" id="quizQuestion">Loading question...</p>
+                <div class="options-grid" id="quizOptions">
+                    <!-- Options injected by JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p id="quizFeedback"></p>
+                <button class="btn-action" id="submitQuiz">Submit Answer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Request Wrapper -->
+    <div style="text-align:center; margin-bottom: 20px;">
+        <button id="notifyBtn" class="quick-link"
+            style="background: rgba(99, 102, 241, 0.2); border: none; color: white; cursor: pointer;">Enable Daily
+            Reminders</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
